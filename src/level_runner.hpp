@@ -65,6 +65,7 @@ private:
 	std::string last_stats_point_level_;
 
 	editor* editor_;
+#ifndef NO_EDITOR
 	boost::scoped_ptr<editor_resolution_manager> editor_resolution_manager_;
 	gui::slider_ptr history_slider_;
 	gui::button_ptr history_button_;
@@ -78,6 +79,7 @@ private:
 	void update_history_trails();
 
 	boost::scoped_ptr<debug_console::console_dialog> console_;
+#endif
 };
 
 class pause_scope

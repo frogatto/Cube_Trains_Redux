@@ -791,6 +791,7 @@ bool level_runner::play_cycle()
 				//std::cerr << "Key #" << (int) key << ".\n";
 				if(key == SDLK_ESCAPE) {
 					if(editor_) {
+#ifndef NO_EDITOR
 						editor_ = NULL;
 						history_slider_.reset();
 						history_button_.reset();
@@ -801,6 +802,7 @@ bool level_runner::play_cycle()
 						paused = false;
 						controls::read_until(lvl_->cycle());
 						init_history_slider();
+#endif
 					} else {
 						should_pause = true;
 					}
