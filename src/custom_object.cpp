@@ -1069,7 +1069,7 @@ void custom_object::process(level& lvl)
 		//standing on.
 		stand_info.traction = standing_on_->surface_traction();
 		stand_info.friction = standing_on_->surface_friction();
-	} else if(!standing_on_ && started_standing && stand_info.collide_with) {
+	} else if(!standing_on_ && started_standing && stand_info.collide_with && velocity_y_ >= 0 && !fired_collide_feet) {
 		//We weren't standing on something last frame, but now we suddenly
 		//are. We should fire a collide_feet event as a result.
 
@@ -1088,6 +1088,7 @@ void custom_object::process(level& lvl)
 
 		}
 
+		if(is_human()) std::cerr << "COLLIDE FEET 1\n";
 		handle_event(OBJECT_EVENT_COLLIDE_FEET, callable);
 		fired_collide_feet = true;
 	}
@@ -1383,7 +1384,7 @@ void custom_object::process(level& lvl)
 			vertical_landed = true;
 		}
 
-		if(effective_velocity_y < 0 || !started_standing) {
+		if(!fired_collide_feet && (effective_velocity_y < 0 || !started_standing)) {
 
 			game_logic::map_formula_callable* callable = new game_logic::map_formula_callable;
 			variant v(callable);
@@ -1400,6 +1401,7 @@ void custom_object::process(level& lvl)
 
 			}
 
+			if(is_human()) std::cerr << "COLLIDE FEET 2\n";
 			handle_event(effective_velocity_y < 0 ? OBJECT_EVENT_COLLIDE_HEAD : OBJECT_EVENT_COLLIDE_FEET, callable);
 			fired_collide_feet = true;
 		}
@@ -1647,6 +1649,7 @@ void custom_object::process(level& lvl)
 			}
 		}
 
+			if(is_human()) std::cerr << "COLLIDE FEET 3\n";
 		handle_event(collide ? OBJECT_EVENT_COLLIDE_SIDE : OBJECT_EVENT_COLLIDE_FEET, callable);
 		fired_collide_feet = true;
 		if(collide_info.damage) {
