@@ -269,13 +269,13 @@ void tree_view_widget::handle_draw() const
 	glTranslatef(GLfloat(x()+2 & ~1), GLfloat(y()+2 & ~1), 0.0);
 
 	if(selected_row_ >= 0 && selected_row_ < nrows()) {
-		SDL_Rect rect = {0,row_height_*selected_row_ - yscroll(),width(),row_height_};
+		SDL_Rect rect = {0,(Sint16)(row_height_*selected_row_ - yscroll()),(Uint16)width(),(Uint16)row_height_};
 		const SDL_Color col = {0xFF,0x00,0x00,0x00};
 		graphics::draw_rect(rect,col,128);
 	}
 
 	if(persistent_highlight_ && highlighted_row_ >= 0 && size_t(persistent_highlight_) < nrows()) {
-		SDL_Rect rect = {0,row_height_*highlighted_row_ - yscroll(),width(),row_height_};
+		SDL_Rect rect = {0,(Sint16)(row_height_*highlighted_row_ - yscroll()),(Uint16)width(),(Uint16)row_height_};
 		graphics::draw_rect(rect, highlight_color_, 128);
 	}
 	glTranslatef(0, GLfloat(-yscroll() & ~1), 0.0);

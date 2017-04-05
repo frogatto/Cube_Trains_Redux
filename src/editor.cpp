@@ -3063,7 +3063,7 @@ void editor::draw_gui() const
 			std::swap(y1,y2);
 		}
 
-		const SDL_Rect rect = {x1, y1, x2 - x1, y2 - y1};
+		const SDL_Rect rect = { (Sint16)(x1), (Sint16)(y1), (Uint16)(x2 - x1), (Uint16)(y2 - y1)};
 		const SDL_Color color = {255,255,255,255};
 		graphics::draw_hollow_rect(rect, color);
 	}

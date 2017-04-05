@@ -125,7 +125,7 @@ bool animation_area_has_alpha_channel(animation_area_ptr anim)
 		const rect& base_area = anim->anim->area();
 		const int xpos = base_area.x() + (base_area.w()+anim->anim->pad())*x;
 		const int ypos = base_area.y() + (base_area.h()+anim->anim->pad())*y;
-		SDL_Rect blit_src = {xpos + info.x_adjust, ypos + info.y_adjust, info.area.w(), info.area.h()};
+		SDL_Rect blit_src = {(Sint16)(xpos + info.x_adjust), (Sint16)(ypos + info.y_adjust), (Uint16)info.area.w(), (Uint16)info.area.h()};
 
 		for(int x = 0; x != blit_src.w; ++x) {
 			for(int y = 0; y != blit_src.h; ++y) {
@@ -349,10 +349,10 @@ UTILITY(compile_objects)
 			const rect& base_area = anim->anim->area();
 			const int xpos = base_area.x() + (base_area.w()+anim->anim->pad())*x;
 			const int ypos = base_area.y() + (base_area.h()+anim->anim->pad())*y;
-			SDL_Rect blit_src = {xpos + info.x_adjust, ypos + info.y_adjust, info.area.w(), info.area.h()};
-			SDL_Rect blit_dst = {anim->dst_area.x() + xdst,
-			                     anim->dst_area.y(),
-								 info.area.w(), info.area.h()};
+			SDL_Rect blit_src = {(Sint16)(xpos + info.x_adjust), (Sint16)(ypos + info.y_adjust), (Uint16)info.area.w(), (Uint16)info.area.h()};
+			SDL_Rect blit_dst = {(Sint16)(anim->dst_area.x() + xdst),
+			                     (Sint16)anim->dst_area.y(),
+								 (Uint16)info.area.w(), (Uint16)info.area.h()};
 			xdst += info.area.w();
 			ASSERT_GE(blit_dst.x, anim->dst_area.x());
 			ASSERT_GE(blit_dst.y, anim->dst_area.y());

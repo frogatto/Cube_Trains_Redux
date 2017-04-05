@@ -164,7 +164,7 @@ void transition_scene(level& lvl, screen_position& screen_pos, bool transition_o
 }
 
 void fade_scene(const level& lvl, screen_position& screen_pos, float fade) {
-	const SDL_Rect r = {0, 0, graphics::screen_width(), graphics::screen_height()};
+	const SDL_Rect r = {0, 0, (Uint16)graphics::screen_width(), (Uint16)graphics::screen_height()};
 	const SDL_Color c = {0,0,0,0};
 	graphics::draw_rect(r, c, 128*fade);
 }
@@ -190,7 +190,7 @@ void iris_scene(const level& lvl, screen_position& screen_pos, float amount) {
 	const point light_pos = player->midpoint();
 
 	if(amount >= 0.99) {
-		SDL_Rect rect = {0, 0, graphics::screen_width(), graphics::screen_height()};
+		SDL_Rect rect = {0, 0, (Uint16)graphics::screen_width(), (Uint16)graphics::screen_height()};
 		graphics::draw_rect(rect, graphics::color_black());
 	} else {
 		draw_scene(lvl, screen_pos);
@@ -202,27 +202,27 @@ void iris_scene(const level& lvl, screen_position& screen_pos, float amount) {
 		const int radius = radius_scale*radius_scale*500;
 		const int center_x = -screen_x + light_pos.x;
 		const int center_y = -screen_y + light_pos.y;
-		SDL_Rect center_rect = {center_x - radius, center_y - radius, radius*2, radius*2 };
+		SDL_Rect center_rect = {(Sint16)(center_x - radius), (Sint16)(center_y - radius), (Uint16)(radius*2), (Uint16)(radius*2) };
 
 		if(center_rect.y > 0) {
-			SDL_Rect top_rect = {0, 0, graphics::screen_width(), center_rect.y};
+			SDL_Rect top_rect = {0, 0, (Uint16)graphics::screen_width(), (Uint16)center_rect.y};
 			graphics::draw_rect(top_rect, graphics::color_black());
 		}
 
 		const int bot_rect_height = graphics::screen_height() - (center_rect.y + center_rect.h);
 		if(bot_rect_height > 0) {
-			SDL_Rect bot_rect = {0, graphics::screen_height() - bot_rect_height, graphics::screen_width(), bot_rect_height};
+			SDL_Rect bot_rect = {0, (Sint16)(graphics::screen_height() - bot_rect_height), (Uint16)graphics::screen_width(), (Uint16)bot_rect_height};
 			graphics::draw_rect(bot_rect, graphics::color_black());
 		}
 
 		if(center_rect.x > 0) {
-			SDL_Rect left_rect = {0, 0, center_rect.x, graphics::screen_height()};
+			SDL_Rect left_rect = {0, 0, (Uint16)center_rect.x, (Uint16)graphics::screen_height()};
 			graphics::draw_rect(left_rect, graphics::color_black());
 		}
 
 		const int right_rect_width = graphics::screen_width() - (center_rect.x + center_rect.w);
 		if(right_rect_width > 0) {
-			SDL_Rect right_rect = {graphics::screen_width() - right_rect_width, 0, right_rect_width, graphics::screen_height()};
+			SDL_Rect right_rect = {(Sint16)(graphics::screen_width() - right_rect_width), 0, (Uint16)right_rect_width, (Uint16)graphics::screen_height()};
 			graphics::draw_rect(right_rect, graphics::color_black());
 		}
 
@@ -277,7 +277,7 @@ void show_end_game()
 	const int ypos = graphics::screen_height()/2 - t.height()/2;
 	for(int n = 0; n <= msg.size(); ++n) {
 		const GLfloat percent = GLfloat(n)/GLfloat(msg.size());
-		SDL_Rect rect = {0, 0, graphics::screen_width(), graphics::screen_height()};
+		SDL_Rect rect = {0, 0, (Uint16)graphics::screen_width(), (Uint16)graphics::screen_height()};
 		graphics::draw_rect(rect, graphics::color_black());
 		graphics::blit_texture(t, xpos, ypos, t.width()*percent, t.height(), 0.0,
 						       0.0, 0.0, percent, 1.0);

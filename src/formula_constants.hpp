@@ -14,7 +14,7 @@ class constants_loader
 {
 public:
 	explicit constants_loader(variant node);
-	~constants_loader();
+	~constants_loader() noexcept(false);
 
 	bool same_as_base() const { return same_as_base_; }
 

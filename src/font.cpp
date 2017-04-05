@@ -125,7 +125,7 @@ graphics::texture render_text_uncached(const std::string& text,
 		s = graphics::surface(SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, f->BitsPerPixel, f->Rmask, f->Gmask, f->Bmask, f->Amask));
 		int ypos = 0;
 		foreach(graphics::surface part, parts) {
-			SDL_Rect rect = {0, ypos, part->w, part->h};
+			SDL_Rect rect = {0, (Sint16)ypos, (Uint16)part->w, (Uint16)part->h};
 			SDL_SetAlpha(part.get(), 0, SDL_ALPHA_OPAQUE);
 			SDL_BlitSurface(part.get(), NULL, s.get(), &rect);
 			ypos += part->h;

@@ -130,7 +130,7 @@ void label::recalculate_texture()
 void label::handle_draw() const
 {
 	if(draw_highlight_) {
-		SDL_Rect rect = {x(), y(), width(), height()};
+		SDL_Rect rect = {(Sint16)x(), (Sint16)y(), (Uint16)width(), (Uint16)height()};
 		graphics::draw_rect(rect, highlight_color_, highlight_color_.unused);
 	}
 	graphics::blit_texture(texture_, x(), y());

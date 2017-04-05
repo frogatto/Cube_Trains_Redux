@@ -335,13 +335,13 @@ void grid::handle_draw() const
 	glTranslatef(x() & ~1, y() & ~1, 0.0);
 	if(show_background_) {
 		const SDL_Color bg = {50,50,50};
-		SDL_Rect rect = {0,0,width(),height()};
+		SDL_Rect rect = {0,0,(Uint16)width(),(Uint16)height()};
 		graphics::draw_rect(rect,bg);
 	}
 
 	if(allow_highlight_ && selected_row_ >= 0 && selected_row_ < nrows()) {
 		if(std::find(header_rows_.begin(), header_rows_.end(), selected_row_) == header_rows_.end()) {
-			SDL_Rect rect = {0,row_height_*selected_row_ - yscroll(),width(),row_height_};
+			SDL_Rect rect = {0,(Sint16)(row_height_*selected_row_ - yscroll()),(Uint16)width(),(Uint16)row_height_};
 			const SDL_Color col = {0xFF,0x00,0x00,0x00};
 			graphics::draw_rect(rect,col,128);
 		}

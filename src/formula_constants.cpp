@@ -112,7 +112,7 @@ constants_loader::constants_loader(variant node) : same_as_base_(false)
 	constants_stack.push_back(m);
 }
 
-constants_loader::~constants_loader()
+constants_loader::~constants_loader() noexcept(false)
 {
 	ASSERT_EQ(constants_stack.empty(), false);
 	constants_stack.pop_back();

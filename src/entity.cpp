@@ -235,17 +235,17 @@ void entity::draw_debug_rects() const
 
 	const rect& body = solid_rect();
 	if(body.w() > 0 && body.h() > 0) {
-		const SDL_Rect rect = { body.x(), body.y(), body.w(), body.h() };
+		const SDL_Rect rect = { (Sint16)body.x(), (Sint16)body.y(), (Uint16)body.w(), (Uint16)body.h() };
 		graphics::draw_rect(rect, graphics::color_black(), 0xAA);
 	}
 
 	const rect& hit = hit_rect();
 	if(hit.w() > 0 && hit.h() > 0) {
-		const SDL_Rect rect = { hit.x(), hit.y(), hit.w(), hit.h() };
+		const SDL_Rect rect = { (Sint16)hit.x(), (Sint16)hit.y(), (Uint16)hit.w(), (Uint16)hit.h() };
 		graphics::draw_rect(rect, graphics::color_red(), 0xAA);
 	}
 
-	const SDL_Rect rect = { feet_x() - 1, feet_y() - 1, 3, 3 };
+	const SDL_Rect rect = { (Sint16)(feet_x() - 1), (Sint16)(feet_y() - 1), 3, 3 };
 	graphics::draw_rect(rect, graphics::color_white(), 0xFF);
 }
 

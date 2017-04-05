@@ -67,7 +67,7 @@ std::string rect::to_string() const
 
 SDL_Rect rect::sdl_rect() const
 {
-	SDL_Rect r = {x(), y(), w(), h()};
+	SDL_Rect r = {(Sint16)x(), (Sint16)y(), (Uint16)w(), (Uint16)h()};
 	return r;
 }
 

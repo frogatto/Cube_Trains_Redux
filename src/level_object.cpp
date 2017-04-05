@@ -176,8 +176,8 @@ void create_compiled_tiles_image()
 		const int dst_x = (itor->second%64) * BaseTileSize;
 		const int dst_y = (itor->second/64) * BaseTileSize;
 
-		SDL_Rect src_rect = { src_x, src_y, BaseTileSize, BaseTileSize };
-		SDL_Rect dst_rect = { dst_x, dst_y, BaseTileSize, BaseTileSize };
+		SDL_Rect src_rect = { (Sint16)src_x, (Sint16)src_y, BaseTileSize, BaseTileSize };
+		SDL_Rect dst_rect = { (Sint16)dst_x, (Sint16)dst_y, BaseTileSize, BaseTileSize };
 
 		SDL_BlitSurface(src.get(), &src_rect, s.get(), &dst_rect);
 	}
@@ -237,8 +237,8 @@ void create_compiled_tiles_image()
 				const int dst_x = (dst_tile%64) * BaseTileSize;
 				const int dst_y = (dst_tile/64) * BaseTileSize;
 
-				SDL_Rect src_rect = { src_x, src_y, BaseTileSize, BaseTileSize };
-				SDL_Rect dst_rect = { dst_x, dst_y, BaseTileSize, BaseTileSize };
+				SDL_Rect src_rect = { (Sint16)src_x, (Sint16)src_y, BaseTileSize, BaseTileSize };
+				SDL_Rect dst_rect = { (Sint16)dst_x, (Sint16)dst_y, BaseTileSize, BaseTileSize };
 
 				SDL_BlitSurface(s.get(), &src_rect, sheets[sheet].get(), &dst_rect);
 			}

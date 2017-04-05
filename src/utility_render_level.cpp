@@ -89,8 +89,8 @@ UTILITY(render_level)
 					}
 				}
 
-				SDL_Rect src_rect = {0, 0, seg_width, seg_height};
-				SDL_Rect dst_rect = {x - lvl->boundaries().x(), y - lvl->boundaries().y(), 0, 0};
+				SDL_Rect src_rect = {0, 0, (Uint16)seg_width, (Uint16)seg_height};
+				SDL_Rect dst_rect = {(Sint16)(x - lvl->boundaries().x()), (Sint16)(y - lvl->boundaries().y()), 0, 0};
 				SDL_BlitSurface(s.get(), &src_rect, level_surface.get(), &dst_rect);
 			}
 		}

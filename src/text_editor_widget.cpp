@@ -53,7 +53,7 @@ const CharArea& get_char_area(int font_size, char c)
 	    i != char_to_area.end(); ++i) {
 		str.push_back(i->first);
 	
-		CharArea area = {col*char_width, row*char_height, (col+1)*char_width, (row+1)*char_height};
+		CharArea area = {(GLfloat)(col*char_width), (GLfloat)(row*char_height), (GLfloat)((col+1)*char_width), (GLfloat)((row+1)*char_height)};
 
 		char_to_area[i->first] = area;
 
@@ -429,7 +429,7 @@ void text_editor_widget::handle_draw() const
 		border_color.b = 128;
 	}
 
-	SDL_Rect border = {x()+1, y()+1, width()-2, height()-2};
+	SDL_Rect border = {(Sint16)(x()+1), (Sint16)(y()+1), (Uint16)(width()-2), (Uint16)(height()-2)};
 	graphics::draw_hollow_rect(border, border_color);
 
 	scrollable_widget::handle_draw();

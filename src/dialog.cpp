@@ -252,7 +252,7 @@ void dialog::handle_draw_children() const {
 void dialog::handle_draw() const
 {
 	if(clear_bg()) {
-		SDL_Rect rect = {x(),y(),width(),height()};
+		SDL_Rect rect = {(Sint16)x(),(Sint16)y(),(Uint16)width(),(Uint16)height()};
 		SDL_Color col = {0,0,0,0};
 		graphics::draw_rect(rect,col,clear_bg_);
 
@@ -272,7 +272,7 @@ void dialog::handle_draw() const
 	}
 
 	if(background_framed_gui_element_.empty() == false) {
-		SDL_Rect rect = {x(),y(),width(),height()};
+		SDL_Rect rect = {(Sint16)x(),(Sint16)y(),(Uint16)width(),(Uint16)height()};
 		SDL_Color col = {0,0,0,0};
 		graphics::draw_rect(rect, col, 204);
 		const_framed_gui_element_ptr window(framed_gui_element::get(background_framed_gui_element_));

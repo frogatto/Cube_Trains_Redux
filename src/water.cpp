@@ -144,7 +144,7 @@ void water::add_wave(const point& p, double xvelocity, double height, double len
 					break;
 				}
 			}
-			wave wv = { p.x, xvelocity, height, length, delta_height, delta_length, bounds.first, bounds.second };
+			wave wv = { (double)p.x, xvelocity, height, length, delta_height, delta_length, bounds.first, bounds.second };
 			a.waves_.push_back(wv);
 			return;
 		}
@@ -156,8 +156,8 @@ bool water::draw_area(const water::area& a, int x, int y, int w, int h) const
 	const graphics::color waterline_color(250, 240, 205, 255);
 	const graphics::color shallowwater_color(0, 51, 61, 140);
 	const graphics::color deepwater_color(0, 51, 61, 153);
-	const SDL_Rect waterline_rect = {a.rect_.x(), a.rect_.y(), a.rect_.w(), 2};
-	const SDL_Rect underwater_rect = {a.rect_.x(), a.rect_.y(), a.rect_.w(), a.rect_.h()};
+	const SDL_Rect waterline_rect = {(Sint16)a.rect_.x(), (Sint16)a.rect_.y(), (Uint16)a.rect_.w(), 2};
+	const SDL_Rect underwater_rect = {(Sint16)a.rect_.x(), (Sint16)a.rect_.y(), (Uint16)a.rect_.w(), (Uint16)a.rect_.h()};
 
 	unsigned char water_color[] = {a.color_[0], a.color_[1], a.color_[2], a.color_[3]};
 	
@@ -186,13 +186,13 @@ bool water::draw_area(const water::area& a, int x, int y, int w, int h) const
 #endif
 	
 	GLfloat vertices[] = {
-		waterline_rect.x, waterline_rect.y, //shallow water colored
-		waterline_rect.x + waterline_rect.w, waterline_rect.y,
+		(GLfloat)waterline_rect.x, (GLfloat)waterline_rect.y, //shallow water colored
+		(GLfloat)(waterline_rect.x + waterline_rect.w), (GLfloat)waterline_rect.y,
 		
-		waterline_rect.x, waterline_rect.y + 100, //deep water colored
-		waterline_rect.x + waterline_rect.w, waterline_rect.y + 100,
-		waterline_rect.x, underwater_rect.y + underwater_rect.h,
-		waterline_rect.x + waterline_rect.w, underwater_rect.y + underwater_rect.h
+		(GLfloat)waterline_rect.x, (GLfloat)(waterline_rect.y + 100), //deep water colored
+		(GLfloat)(waterline_rect.x + waterline_rect.w), (GLfloat)(waterline_rect.y + 100),
+		(GLfloat)waterline_rect.x, (GLfloat)(underwater_rect.y + underwater_rect.h),
+		(GLfloat)(waterline_rect.x + waterline_rect.w), (GLfloat)(underwater_rect.y + underwater_rect.h)
 	};
 
 #if defined(TARGET_TEGRA)	
@@ -236,10 +236,10 @@ bool water::draw_area(const water::area& a, int x, int y, int w, int h) const
 	foreach(const Segment& seg, a.surface_segments_) {
 		glColor4f(1.0, 1.0, 1.0, 1.0);
 		GLfloat varray[] = {
-			seg.first - EndSegmentSize, waterline_rect.y,
-			seg.first, waterline_rect.y,
-			seg.second, waterline_rect.y,
-			seg.second + EndSegmentSize, waterline_rect.y,
+			(GLfloat)(seg.first - EndSegmentSize), (GLfloat)waterline_rect.y,
+			(GLfloat)seg.first, (GLfloat)waterline_rect.y,
+			(GLfloat)seg.second, (GLfloat)waterline_rect.y,
+			(GLfloat)(seg.second + EndSegmentSize), (GLfloat)waterline_rect.y,
 		};
 		static const unsigned char vcolors[] = {
 			255, 255, 255, 0,
@@ -263,10 +263,10 @@ bool water::draw_area(const water::area& a, int x, int y, int w, int h) const
 		//draw a second line, in a different color, just below the first
 		glColor4f(0.0, 0.9, 0.75, 0.5);
 		GLfloat varray2[] = {
-			seg.first - EndSegmentSize, waterline_rect.y+2,
-			seg.first, waterline_rect.y+2,
-			seg.second, waterline_rect.y+2,
-			seg.second + EndSegmentSize, waterline_rect.y+2,
+			(GLfloat)(seg.first - EndSegmentSize), (GLfloat)(waterline_rect.y+2),
+			(GLfloat)seg.first, (GLfloat)(waterline_rect.y+2),
+			(GLfloat)seg.second, (GLfloat)(waterline_rect.y+2),
+			(GLfloat)(seg.second + EndSegmentSize), (GLfloat)(waterline_rect.y+2),
 		};
 		static const unsigned char vcolors2[] = {
 			0, 230, 200, 0,

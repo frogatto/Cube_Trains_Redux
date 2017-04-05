@@ -257,7 +257,7 @@ void draw()
 
 	int ypos = 100;
 	foreach(const graphics::texture& t, messages()) {
-		const SDL_Rect area = {0, ypos-2, t.width() + 10, t.height() + 5};
+		const SDL_Rect area = {0, (Sint16)(ypos-2), (Uint16)(t.width() + 10), (Uint16)(t.height() + 5)};
 		graphics::draw_rect(area, graphics::color_black(), 128);
 		graphics::blit_texture(t, 5, ypos);
 		ypos += t.height() + 5;

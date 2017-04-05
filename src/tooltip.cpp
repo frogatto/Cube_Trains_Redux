@@ -71,7 +71,7 @@ void draw_tooltip()
 		y = graphics::screen_height()-height;
 	}
 
-	SDL_Rect rect = {x,y,width,height};
+	SDL_Rect rect = {(Sint16)x,(Sint16)y,(Uint16)width,(Uint16)height};
 	graphics::draw_rect(rect, graphics::color_black(), 160);
 
 	graphics::blit_texture(text(),x+pad,y+pad);
